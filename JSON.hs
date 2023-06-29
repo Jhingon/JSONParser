@@ -55,7 +55,7 @@ parseInt :: Parser Integer
 parseInt = posInt <|> negInt
 
 parseFloat :: Parser Float
-parseFloat = read <$> (satisfy (=='-') <:> parseDigits <|> parseDigits)
+parseFloat = read <$> ((satisfy (=='-') <:> parseDigits) <|> parseDigits)
   where
     parseDigits = digits <++> (satisfy (=='.') <:> digits)
 

@@ -40,3 +40,6 @@ infixr 3 <:>
 infixr 3 <++>
 (<++>) :: Applicative f => f [a] -> f [a] -> f [a]
 (<++>) = liftA2 (++)
+
+join :: [[a]] -> [a]
+join xs = foldl (++) [] xs
