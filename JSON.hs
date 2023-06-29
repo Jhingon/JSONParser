@@ -55,7 +55,9 @@ parseInt :: Parser Integer
 parseInt = posInt <|> negInt
 
 parseFloat :: Parser Float
-parseFloat = (\x -> (read x)) <$> (digits <++> (satisfy (=='.') <:> pure []) <++> digits)
+parseFloat = read <$> (satisfy (=='-') <:> parseDigits <|> parseDigits)
+  where
+    parseDigits = digits <++> (satisfy (=='.') <:> digits)
 
 parseScientific :: Parser Scientific
 parseScientific = Sc 
