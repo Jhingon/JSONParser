@@ -97,7 +97,7 @@ parseBool = JBool <$> (const True <$> chars "true") <|> (const False <$> chars "
 parsePair :: Parser (String, JValue)
 parsePair = (,) <$> (convert <$> key) <*> value
   where
-    key = parseString <* whitespace <* satisfy (==':')
+    key = whitespace *> parseString <* whitespace <* satisfy (==':')
     value = parseJSON
     convert (JString s) = s
 
